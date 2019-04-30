@@ -2,7 +2,7 @@
 #### Author: Mason Flint
 #### Date: 29 April 2019
 ## Description:
-Command line chat application using websockets
+Command line chat application built using golang and websockets
 
 Built using golang and the following websocket API:
 - [Source](https://github.com/gorilla/websocket)
