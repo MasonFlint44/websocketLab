@@ -12,8 +12,8 @@ type request interface {
 	GetClient() interfaces.Client
 }
 
-// webRequest - Implementation of request for server processing
-type webRequest struct {
+// serverRequest - Implementation of request for server processing
+type serverRequest struct {
 	// Message - Message sent by client
 	Message interfaces.Message
 	// Client - Client who made the request
@@ -21,11 +21,11 @@ type webRequest struct {
 }
 
 // GetMessage - Used to get message sent by the client
-func (r webRequest) GetMessage() interfaces.Message {
+func (r serverRequest) GetMessage() interfaces.Message {
 	return r.Message
 }
 
 // GetClient - Used to get client who made the request
-func (r webRequest) GetClient() interfaces.Client {
+func (r serverRequest) GetClient() interfaces.Client {
 	return r.Client
 }

@@ -75,7 +75,6 @@ func readInput(conn *websocket.Conn) {
 			fallthrough
 		case "logout":
 			outboundMessages <- message
-			fallthrough
 		case "help":
 			fmt.Println("Available commands:")
 			fmt.Println("- login <handle> <pass> - Log in to server")

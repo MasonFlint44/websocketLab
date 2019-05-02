@@ -48,12 +48,11 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	client := models.Client{Conn: conn}
+	client := &models.Client{Conn: conn}
 	clients[conn] = client
 	go receiveMessages(conn)
 
-	client.Handle = "Server"
-	outboundResponses <- models.Message{Body: "Welcome to the chat room!", Client: client}
+	outboundResponses <- &models.Message{Body: "Welcome to the chat room!", Client: &models.Client{Handle: "Server", Conn: client.GetConn()}}
 
 	fmt.Println("Client connected")
 }
@@ -73,14 +72,14 @@ func receiveMessages(conn *websocket.Conn) {
 			log.Println("Disconnecting client...")
 			break
 		}
-		message := models.Message{
+		message := &models.Message{
 			Command: demarshaled.Command,
 			Body:    demarshaled.Body,
-			Client:  demarshaled.Client,
+			Client:  &demarshaled.Client,
 		}
-		request := webRequest{
+		request := serverRequest{
 			Message: message,
-			Client:  clients[conn],
+			Client:  models.CloneClient(clients[conn]),
 		}
 
 		switch command := message.GetCommand(); command {

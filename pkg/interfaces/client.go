@@ -10,4 +10,10 @@ type Client interface {
 	GetPass() string
 	// GetConn - Returns connection to server
 	GetConn() *websocket.Conn
+	// SetHandle - Set handle used to identify user
+	SetHandle(handle string)
+	// SetPass - Set password used to authenticate
+	SetPass(pass string)
+	// SetConn - Set connection to server
+	SetConn(conn *websocket.Conn)
 }
